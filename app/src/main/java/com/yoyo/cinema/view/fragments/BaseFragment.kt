@@ -10,6 +10,5 @@ abstract class BaseFragment: Fragment() {
         setupObservers()
     }
 
-
     abstract fun setupObservers()
 }

@@ -11,32 +11,39 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoyo.cinema.R
+import com.yoyo.cinema.databinding.FragmentMovieListBinding
+import com.yoyo.cinema.model.MovieItem
 import com.yoyo.cinema.view.adapters.MovieListAdapter
-import com.yoyo.cinema.viewmodel.MovieSearchViewModel
+import com.yoyo.cinema.viewmodel.movie.MovieSearchViewModel
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
  */
-class MovieListFragment : BaseFragment() {
+class MovieListFragment : BaseFragment(), MovieListAdapter.OnItemFavoriteListener {
 
     private val movieModel by viewModel<MovieSearchViewModel>()
-    private val movieListAdapter = MovieListAdapter()
+    private val movieListAdapter = MovieListAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        DataBindingUtil.inflate<Moviie(inflater, R.layout.fragment_movie_list, container, false)
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
+        val dataBinding =
+            DataBindingUtil.inflate<FragmentMovieListBinding>(inflater, R.layout.fragment_movie_list, container, false)
+        dataBinding.viewModel = movieModel
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieListRecyclerview.adapter = movieListAdapter
         movieListRecyclerview.layoutManager =  LinearLayoutManager(context)
+    }
+
+    override fun onFavorite(movie: MovieItem) {
+        movieModel.toggleFavorite(movie)
     }
 
     override fun setupObservers() {

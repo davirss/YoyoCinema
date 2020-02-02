@@ -1,6 +1,7 @@
 package com.yoyo.cinema.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.yoyo.cinema.model.repository.db.entities.Genre
@@ -14,8 +15,10 @@ data class MovieItem(
     val overview: String,
     @SerializedName("release_date")
     val releaseDate: Date,
-    @SerializedName("genre_ids", alternate = ["genres"])
-    val genreList: List<Genre>,
+    @SerializedName("genre_ids")
+    val genreList: List<Int>?,
+    @SerializedName("genres")
+    val genres: List<Genre>?,
     @PrimaryKey
     val id: Long,
     @SerializedName("original_title")
@@ -23,7 +26,7 @@ data class MovieItem(
     @SerializedName("original_language")
     val originalLanguage: String,
     val title: String,
-    @SerializedName("backgrop_path")
+    @SerializedName("backdrop_path")
     val backdropPath: String,
     val popularity: Double,
     @SerializedName("vote_count")
@@ -31,5 +34,5 @@ data class MovieItem(
     val video: Boolean,
     @SerializedName("vote_average")
     val voteAverage: Double,
-    val isFavorited: Boolean
+    var isFavorited: Boolean = false
 )

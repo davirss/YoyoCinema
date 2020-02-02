@@ -6,7 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.yoyo.cinema.viewmodel.MovieSearchViewModel" />
+            type="com.yoyo.cinema.viewmodel.movie.MovieSearchViewModel" />
+        <variable
+            name="query"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +23,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@{viewModel.query}"
+            android:text="@={query}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Button"
-            android:onClick="@{(_) -> viewModel.queryMovies()}"
+            android:onClick="@{(_) -> viewModel.queryMovies(query)}"
             app:layout_constraintEnd_toEndOf="@+id/movie_query_edittext"
             app:layout_constraintStart_toStartOf="@+id/movie_query_edittext"
             app:layout_constraintTop_toBottomOf="@+id/movie_query_edittext" />

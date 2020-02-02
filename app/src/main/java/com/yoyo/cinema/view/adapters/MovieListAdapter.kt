@@ -10,7 +10,8 @@ import com.yoyo.cinema.model.MovieItem
 import com.yoyo.cinema.view.fragments.MovieListFragmentDirections
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListener) :
+    RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     var movieList: List<MovieItem> = ArrayList()
         set(value) {
@@ -20,7 +21,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(view)
+        return MovieViewHolder(view, onItemFavoriteListener)
     }
 
     override fun getItemCount() = movieList.size
@@ -29,24 +30,34 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>()
         holder.bind(movieList[position])
     }
 
+    interface OnItemFavoriteListener {
 
-    class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        fun onFavorite(movieItem: MovieItem)
+    }
+
+    class MovieViewHolder(itemView: View, favorite: OnItemFavoriteListener) :
+        RecyclerView.ViewHolder(itemView) {
 
         lateinit var movieItem: MovieItem
 
         init {
             itemView.setOnClickListener {
-                val action = MovieListFragmentDirections.actionMovieListFragmentToDetails(movieItem.id)
+                val action =
+                    MovieListFragmentDirections.actionMovieListFragmentToDetails(movieItem.id)
                 it.findNavController().navigate(action)
             }
             itemView.favoriteButton.setOnClickListener {
-
+                favorite.onFavorite(movieItem)
             }
         }
 
         fun bind(movieItem: MovieItem) {
             this.movieItem = movieItem
             itemView.movieTitle.text = movieItem.originalTitle
+
+            val icon =  if (movieItem.isFavorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite_border
+            itemView.favoriteButton.setImageDrawable(itemView.context.getDrawable(icon))
+
         }
     }
 }

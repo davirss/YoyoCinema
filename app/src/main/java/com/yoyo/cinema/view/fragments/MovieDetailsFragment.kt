@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.yoyo.cinema.R
-import com.yoyo.cinema.viewmodel.MovieDetailsViewModel
+import com.yoyo.cinema.viewmodel.movie.MovieDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

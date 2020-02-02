@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import com.yoyo.cinema.model.repository.db.entities.Genre
 import java.util.*
 
+
 class Converters {
 
     @TypeConverter
@@ -27,6 +28,16 @@ class Converters {
     fun fromStringtoGenreList(string: String?): List<Genre>? {
         return string?.let { Gson().fromJson(string) }
     }
+
+    @TypeConverter
+    fun fromStringToArray(value: String): List<Int> {
+        return Gson().fromJson(value)
+    }
+
+    @TypeConverter
+    fun fromArrayListToString(list: List<Int>): String {
+        return  Gson().toJson(list)
+    }
 }
 
-inline fun <reified T> Gson.fromJson(json: String) = fromJson<T>(json, object: TypeToken<T>() {}.type)
+inline fun <reified T> Gson.fromJson(json: String): T = fromJson<T>(json, object: TypeToken<T>() {}.type)
