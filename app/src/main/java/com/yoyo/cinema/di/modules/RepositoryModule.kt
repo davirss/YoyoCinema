@@ -4,5 +4,5 @@ import com.yoyo.cinema.model.repository.MovieRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { MovieRepository(get()) }
+    single { MovieRepository(get()) }
 }
