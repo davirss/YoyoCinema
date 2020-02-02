@@ -7,14 +7,15 @@ import com.yoyo.cinema.model.repository.MovieRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val movieRepository: MovieRepository): BaseViewModel() {
+class MovieDetailsViewModel(private val movieRepository: MovieRepository,
+                            private val movieId: Long): BaseViewModel() {
 
     val details = MutableLiveData<MovieItem>()
 
-    fun loadMovieDetails(id: Long) {
+    fun loadMovieDetails() {
         lastJob?.cancel()
         lastJob = viewModelScope.launch {
-            movieRepository.getMovieDetails(id).collect {
+            movieRepository.getMovieDetails(movieId).collect {
                 details.value = it
             }
         }

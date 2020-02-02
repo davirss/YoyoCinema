@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoyo.cinema.R
@@ -28,6 +29,7 @@ class MovieListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+//        DataBindingUtil.inflate<Moviie(inflater, R.layout.fragment_movie_list, container, false)
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
@@ -35,10 +37,6 @@ class MovieListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         movieListRecyclerview.adapter = movieListAdapter
         movieListRecyclerview.layoutManager =  LinearLayoutManager(context)
-
-        submit_button.setOnClickListener {
-            movieModel.queryMovies(movie_query_edittext.text.toString())
-        }
     }
 
     override fun setupObservers() {

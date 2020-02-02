@@ -39,6 +39,9 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>()
                 val action = MovieListFragmentDirections.actionMovieListFragmentToDetails(movieItem.id)
                 it.findNavController().navigate(action)
             }
+            itemView.favoriteButton.setOnClickListener {
+
+            }
         }
 
         fun bind(movieItem: MovieItem) {

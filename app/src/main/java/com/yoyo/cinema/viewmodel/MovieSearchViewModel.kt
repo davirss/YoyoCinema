@@ -9,11 +9,12 @@ import kotlinx.coroutines.launch
 
 class MovieSearchViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
     val movieResults = MutableLiveData<List<MovieItem>>()
+    val query = MutableLiveData<String>()
 
-    fun queryMovies(query: String) {
+    fun queryMovies() {
         lastJob?.cancel()
         lastJob = viewModelScope.launch {
-            movieRepository.getMovieList(query).collect {
+            movieRepository.getMovieList(query.value!!).collect {
                 movieResults.value  = it
             }
         }

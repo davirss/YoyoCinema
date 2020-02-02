@@ -1,17 +1,22 @@
 package com.yoyo.cinema.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.yoyo.cinema.model.repository.db.entities.Genre
 import java.util.*
 
-class MovieItem(
+@Entity(tableName = "movies")
+data class MovieItem(
     @SerializedName("poster_path")
     val posterPath: String,
     val adult: Boolean,
     val overview: String,
     @SerializedName("release_date")
     val releaseDate: Date,
-    @SerializedName("genre_list")
-    val genreList: List<Int>,
+    @SerializedName("genre_ids", alternate = ["genres"])
+    val genreList: List<Genre>,
+    @PrimaryKey
     val id: Long,
     @SerializedName("original_title")
     val originalTitle: String,
@@ -25,6 +30,6 @@ class MovieItem(
     val voteCount: Int,
     val video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Double
-
+    val voteAverage: Double,
+    val isFavorited: Boolean
 )

@@ -1,9 +1,10 @@
 package com.yoyo.cinema.model.repository
 
 import com.yoyo.cinema.model.repository.api.TheMovieDbApi
+import com.yoyo.cinema.model.repository.db.dao.MovieDao
 import kotlinx.coroutines.flow.flow
 
-class MovieRepository(private val movieDbApi: TheMovieDbApi) {
+class MovieRepository(private val movieDbApi: TheMovieDbApi, private val movieDao: MovieDao) {
 
 
     fun getMovieList(query: String) = flow {

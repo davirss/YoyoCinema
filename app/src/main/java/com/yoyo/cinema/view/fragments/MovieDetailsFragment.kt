@@ -10,12 +10,14 @@ import com.yoyo.cinema.R
 import com.yoyo.cinema.viewmodel.MovieDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class MovieDetailsFragment : BaseFragment() {
 
-    val args: MovieDetailsFragmentArgs by navArgs()
-    val viewModel: MovieDetailsViewModel by viewModel()
-
+    private val args: MovieDetailsFragmentArgs by navArgs()
+    private val viewModel: MovieDetailsViewModel by viewModel{
+        parametersOf(args.movieId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +29,7 @@ class MovieDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadMovieDetails(args.movieId)
+        viewModel.loadMovieDetails()
     }
 
     override fun setupObservers() {
