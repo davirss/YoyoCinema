@@ -10,12 +10,17 @@
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" >
         <action
-            android:id="@+id/action_movieListFragment_to_placeholder"
+            android:id="@+id/action_movieListFragment_to_details"
             app:destination="@id/details" />
         <action
             android:id="@+id/action_movieListFragment_to_favorites"
             app:destination="@id/favorites" />
     </fragment>
-    <fragment android:id="@+id/details" />
+    <fragment android:id="@+id/details"
+        android:name="com.yoyo.cinema.view.fragments.MovieDetailsFragment">
+        <argument
+            android:name="movie_id"
+            app:argType="long" />
+    </fragment>
     <fragment android:id="@+id/favorites" />
 </navigation>

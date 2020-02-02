@@ -7,10 +7,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MovieSearchViewModel(private val movieRepository: MovieRepository) : ViewModel() {
-
+class MovieSearchViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
     val movieResults = MutableLiveData<List<MovieItem>>()
-    private var lastJob: Job? = null
 
     fun queryMovies(query: String) {
         lastJob?.cancel()

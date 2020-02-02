@@ -15,4 +15,11 @@ class MovieRepository(private val movieDbApi: TheMovieDbApi) {
             this.results
         }
 
+    fun getMovieDetails(id: Long) = flow {
+        emit(getMovieDetailsAPI(id))
+    }
+
+    private suspend fun getMovieDetailsAPI(id: Long) =
+        movieDbApi.getMovieDetail(id)
+
 }

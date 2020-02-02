@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class MovieListFragment : Fragment() {
+class MovieListFragment : BaseFragment() {
 
     private val movieModel by viewModel<MovieSearchViewModel>()
     private val movieListAdapter = MovieListAdapter()
@@ -39,11 +39,9 @@ class MovieListFragment : Fragment() {
         submit_button.setOnClickListener {
             movieModel.queryMovies(movie_query_edittext.text.toString())
         }
-
-        setupObservers()
     }
 
-    private fun setupObservers() {
+    override fun setupObservers() {
         movieModel.movieResults.observe(this, Observer {
             Log.d("Ob", "Lista atualizada ${it.size}")
             movieListAdapter.movieList = it

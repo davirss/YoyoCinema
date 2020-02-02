@@ -1,17 +1,16 @@
 package com.yoyo.cinema.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.yoyo.cinema.R
 import com.yoyo.cinema.model.MovieItem
-import com.yoyo.cinema.viewmodel.MovieSearchViewModel
+import com.yoyo.cinema.view.fragments.MovieListFragmentDirections
 import kotlinx.android.synthetic.main.item_movie.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieListAdapter: RecyclerView.Adapter<MovieViewHolder>() {
+class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     var movieList: List<MovieItem> = ArrayList()
         set(value) {
@@ -30,11 +29,21 @@ class MovieListAdapter: RecyclerView.Adapter<MovieViewHolder>() {
         holder.bind(movieList[position])
     }
 
-}
 
-class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class MovieViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    fun bind(movieItem: MovieItem) {
-        itemView.movieTitle.text = movieItem.originalTitle
+        lateinit var movieItem: MovieItem
+
+        init {
+            itemView.setOnClickListener {
+                val action = MovieListFragmentDirections.actionMovieListFragmentToDetails(movieItem.id)
+                it.findNavController().navigate(action)
+            }
+        }
+
+        fun bind(movieItem: MovieItem) {
+            this.movieItem = movieItem
+            itemView.movieTitle.text = movieItem.originalTitle
+        }
     }
 }

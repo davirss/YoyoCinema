@@ -27,9 +27,8 @@ class ApiTest : KoinTest {
         }
         runBlocking {
             val resut = movieRepository.getMovieList("Titanic").collect {
-
+                movieRepository.getMovieDetails(it[0].id)
             }
-//            assert(resut.results[0].originalTitle.isNotEmpty())
         }
     }
 }

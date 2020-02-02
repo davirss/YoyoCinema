@@ -3,7 +3,7 @@ package com.yoyo.cinema.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class MovieItem(
+class MovieItem(
     @SerializedName("poster_path")
     val posterPath: String,
     val adult: Boolean,
@@ -26,4 +26,5 @@ data class MovieItem(
     val video: Boolean,
     @SerializedName("vote_average")
     val voteAverage: Double
+
 )
