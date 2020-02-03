@@ -52,11 +52,9 @@ class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListene
             }
         }
 
-        private val set = ConstraintSet()
-
         fun bind(movieItem: MovieItem) {
             this.movieItem = movieItem
-            itemView.movieTitle.text = movieItem.originalTitle
+            itemView.movieTitle.text = movieItem.title
             itemView.favoriteButton.isChecked = movieItem.isFavorited
 
             Glide
