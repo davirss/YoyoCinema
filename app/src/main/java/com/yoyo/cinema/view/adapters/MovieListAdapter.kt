@@ -3,11 +3,14 @@ package com.yoyo.cinema.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.yoyo.cinema.R
 import com.yoyo.cinema.model.MovieItem
-import com.yoyo.cinema.view.fragments.MovieListFragmentDirections
+import com.yoyo.cinema.view.PosterGlideTarget
+import com.yoyo.cinema.view.fragments.MovieDetailsFragmentDirections
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListener) :
@@ -31,7 +34,6 @@ class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListene
     }
 
     interface OnItemFavoriteListener {
-
         fun onFavorite(movieItem: MovieItem)
     }
 
@@ -42,8 +44,7 @@ class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListene
 
         init {
             itemView.setOnClickListener {
-                val action =
-                    MovieListFragmentDirections.actionMovieListFragmentToDetails(movieItem.id)
+                val action = MovieDetailsFragmentDirections.actionGlobalDetails(movieItem.id)
                 it.findNavController().navigate(action)
             }
             itemView.favoriteButton.setOnClickListener {
@@ -51,10 +52,24 @@ class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListene
             }
         }
 
+        private val set = ConstraintSet()
+
         fun bind(movieItem: MovieItem) {
             this.movieItem = movieItem
             itemView.movieTitle.text = movieItem.originalTitle
             itemView.favoriteButton.isChecked = movieItem.isFavorited
+
+            Glide
+                .with(itemView)
+                .asBitmap()
+                .load("https://image.tmdb.org/t/p/w500/${movieItem.posterPath}")
+                .into(
+                    PosterGlideTarget(
+                        itemView.movieItemConstrLayout,
+                        itemView.posterImageView
+                    )
+                )
+
         }
     }
 }

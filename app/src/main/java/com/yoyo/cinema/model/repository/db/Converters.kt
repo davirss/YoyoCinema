@@ -21,7 +21,7 @@ class Converters {
 
     @TypeConverter
     fun fromGenreListToJson(list: List<Genre>?): String? {
-        return list.let { Gson().toJson(list) }
+        return list?.let { Gson().toJson(list) }
     }
 
     @TypeConverter
@@ -30,13 +30,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromStringToArray(value: String): List<Int> {
-        return Gson().fromJson(value)
+    fun fromStringToArray(value: String?): List<Int>? {
+        return value?.let { Gson().fromJson(value) }
     }
 
     @TypeConverter
-    fun fromArrayListToString(list: List<Int>): String {
-        return  Gson().toJson(list)
+    fun fromArrayListToString(list: List<Int>?): String? {
+        return list?.let { Gson().toJson(list) }
     }
 }
 

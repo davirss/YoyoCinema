@@ -9,12 +9,8 @@ import kotlinx.coroutines.launch
 
 class MovieSearchViewModel(private val movieRepository: MovieRepository) :
     BaseMovieViewModel(movieRepository) {
-    val movieResults = movieRepository.favoreMovies.asLiveData()
 
-
-    private val _isSearching = MutableLiveData<Boolean>(false)
-    val isSearching: LiveData<Boolean>
-        get() = _isSearching
+    val movieResults =  MutableLiveData<List<MovieItem>>()
 
     fun queryMovies(query: String?) {
         if (query.isNullOrBlank()) {
@@ -27,7 +23,9 @@ class MovieSearchViewModel(private val movieRepository: MovieRepository) :
             try {
                 _isLoading.value = true
                 movieRepository.getMovieList(query)
-                    .collect()
+                    .collect {
+                        movieResults.value = it
+                    }
             } catch (e: Throwable) {
                 _errorMessage.value = R.string.err_fetch_movie
             } finally {

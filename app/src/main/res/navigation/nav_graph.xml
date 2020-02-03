@@ -3,28 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/movieListFragment">
+    app:startDestination="@id/favoriteMoviesFragment">
     <fragment
         android:id="@+id/movieListFragment"
         android:name="com.yoyo.cinema.view.fragments.MovieListFragment"
-        android:label="fragment_movie_list"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_movie_list" >
         <action
             android:id="@+id/action_movieListFragment_to_details"
-            app:destination="@id/details" />
-        <action
-            android:id="@+id/action_movieListFragment_to_favoriteMoviesFragment"
-            app:destination="@id/favoriteMoviesFragment" />
+            app:destination="@id/details"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"
+            app:popUpTo="@+id/movieListFragment" />
     </fragment>
     <fragment android:id="@+id/details"
-        android:name="com.yoyo.cinema.view.fragments.MovieDetailsFragment">
+        android:name="com.yoyo.cinema.view.fragments.MovieDetailsFragment"
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie_id"
             app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/favoriteMoviesFragment"
-        android:name="com.yoyo.cinema.FavoriteMoviesFragment"
-        android:label="fragment_favorite_movies"
-        tools:layout="@layout/fragment_favorite_movies" />
+        android:name="com.yoyo.cinema.view.fragments.FavoriteMoviesFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_movie_favorite_list" >
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_details"
+            app:destination="@id/details"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"
+            app:popUpTo="@+id/favoriteMoviesFragment" />
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@+id/favoriteMoviesFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_details" app:destination="@id/details" />
 </navigation>

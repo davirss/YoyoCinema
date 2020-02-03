@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.yoyo.cinema.viewmodel.movie.MovieSearchViewModel" />
@@ -19,55 +20,51 @@
 
         <EditText
             android:id="@+id/movie_query_edittext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@={query}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/submit_button"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Button"
+            android:layout_marginEnd="16dp"
             android:onClick="@{(_) -> viewModel.queryMovies(query)}"
-            app:layout_constraintEnd_toEndOf="@+id/movie_query_edittext"
-            app:layout_constraintStart_toStartOf="@+id/movie_query_edittext"
-            app:layout_constraintTop_toBottomOf="@+id/movie_query_edittext" />
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_query_edittext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/movie_query_edittext" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movieListRecyclerview"
-            android:layout_width="409dp"
-            android:layout_height="620dp"
-            android:layout_marginStart="1dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/submit_button" />
+            app:layout_constraintTop_toBottomOf="@+id/movie_query_edittext" />
 
-
-        <android.support.constraint.Group
+        <TextView
+            android:id="@+id/descriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.isSearching()}"
-            app:constraint_referenced_ids="submit_button,movie_query_edittext"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="32dp"
+            android:text="@string/search"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_favorite_full" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
