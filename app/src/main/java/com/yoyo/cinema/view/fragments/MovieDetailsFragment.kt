@@ -23,7 +23,7 @@ class MovieDetailsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMovieDetailBinding
     private val args: MovieDetailsFragmentArgs by navArgs()
-    private val viewModel: MovieDetailsViewModel by viewModel{
+    private val viewModel: MovieDetailsViewModel by viewModel {
         parametersOf(args.movieId)
     }
 

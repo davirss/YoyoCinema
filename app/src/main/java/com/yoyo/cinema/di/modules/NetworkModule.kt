@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val baseUrl = "https://api.themoviedb.org/3/"
 
-val networkModule =  module {
+val networkModule = module {
     factory { ApiKeyInterceptor() }
     factory { provideOkHttpClient(get()) }
     factory { provideTmdbApi(get()) }
@@ -31,7 +31,7 @@ fun provideOkHttpClient(interceptor: ApiKeyInterceptor) =
 
 fun provideTmdbApi(retrofit: Retrofit) = retrofit.create(TheMovieDbApi::class.java)
 
-class ApiKeyInterceptor: Interceptor {
+class ApiKeyInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val urlWithApiKey = chain.request().url()

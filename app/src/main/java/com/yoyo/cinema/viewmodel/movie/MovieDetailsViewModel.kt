@@ -1,6 +1,8 @@
 package com.yoyo.cinema.viewmodel.movie
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.yoyo.cinema.model.MovieItem
 import com.yoyo.cinema.model.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
@@ -8,10 +10,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val movieRepository: MovieRepository,
-                            private val movieId: Long): BaseMovieViewModel(movieRepository) {
+class MovieDetailsViewModel(
+    private val movieRepository: MovieRepository,
+    private val movieId: Long
+) : BaseMovieViewModel(movieRepository) {
 
-    private val _details =  MutableLiveData<MovieItem>()
+    private val _details = MutableLiveData<MovieItem>()
     val details: LiveData<MovieItem>
         get() = _details
 

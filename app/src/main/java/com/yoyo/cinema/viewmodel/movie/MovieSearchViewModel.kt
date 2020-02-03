@@ -1,6 +1,7 @@
 package com.yoyo.cinema.viewmodel.movie
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.yoyo.cinema.R
 import com.yoyo.cinema.model.MovieItem
 import com.yoyo.cinema.model.repository.MovieRepository
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 class MovieSearchViewModel(private val movieRepository: MovieRepository) :
     BaseMovieViewModel(movieRepository) {
 
-    val movieResults =  MutableLiveData<List<MovieItem>>()
+    val movieResults = MutableLiveData<List<MovieItem>>()
 
     fun queryMovies(query: String?) {
         if (query.isNullOrBlank()) {

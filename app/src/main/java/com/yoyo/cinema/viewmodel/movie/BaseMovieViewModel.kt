@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class BaseMovieViewModel(private val movieRepository: MovieRepository): BaseViewModel() {
+abstract class BaseMovieViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
 
     fun toggleFavorite(movieItem: MovieItem) {
         movieItem.isFavorited = !movieItem.isFavorited

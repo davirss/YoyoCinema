@@ -1,6 +1,5 @@
 package com.yoyo.cinema.model.repository.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.yoyo.cinema.model.MovieItem
 import kotlinx.coroutines.flow.Flow

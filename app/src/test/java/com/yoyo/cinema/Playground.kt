@@ -18,8 +18,8 @@ class ApiTest : KoinTest {
     @Test
     fun test_movie_query_api() {
         startKoin {
-            modules( networkModule )
-            modules( repositoryModule)
+            modules(networkModule)
+            modules(repositoryModule)
         }
         runBlocking {
             val resut = movieRepository.getMovieList("Titanic").collect {

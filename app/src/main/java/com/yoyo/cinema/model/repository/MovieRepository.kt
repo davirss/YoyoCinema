@@ -6,7 +6,6 @@ import com.yoyo.cinema.model.repository.db.dao.MovieDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
 
 class MovieRepository(private val movieDbApi: TheMovieDbApi, private val movieDao: MovieDao) {
 
