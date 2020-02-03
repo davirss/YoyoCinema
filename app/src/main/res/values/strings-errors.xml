@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="err_blank_query">Query empty or invalid</string>
+    <string name="err_fetch_movie">Error when fetching movie</string>
+</resources>

@@ -27,7 +27,7 @@ data class MovieItem(
     val originalLanguage: String,
     val title: String,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     val popularity: Double,
     @SerializedName("vote_count")
     val voteCount: Int,

@@ -54,10 +54,7 @@ class MovieListAdapter(private val onItemFavoriteListener: OnItemFavoriteListene
         fun bind(movieItem: MovieItem) {
             this.movieItem = movieItem
             itemView.movieTitle.text = movieItem.originalTitle
-
-            val icon =  if (movieItem.isFavorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite_border
-            itemView.favoriteButton.setImageDrawable(itemView.context.getDrawable(icon))
-
+            itemView.favoriteButton.isChecked = movieItem.isFavorited
         }
     }
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.yoyo.cinema.R
 import com.yoyo.cinema.databinding.FragmentMovieListBinding
 import com.yoyo.cinema.model.MovieItem
@@ -25,15 +26,16 @@ class MovieListFragment : BaseFragment(), MovieListAdapter.OnItemFavoriteListene
 
     private val movieModel by viewModel<MovieSearchViewModel>()
     private val movieListAdapter = MovieListAdapter(this)
+    private lateinit var fragmentMovieListBinding: FragmentMovieListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val dataBinding =
+        fragmentMovieListBinding =
             DataBindingUtil.inflate<FragmentMovieListBinding>(inflater, R.layout.fragment_movie_list, container, false)
-        dataBinding.viewModel = movieModel
-        return dataBinding.root
+        fragmentMovieListBinding.viewModel = movieModel
+        return fragmentMovieListBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,8 +50,13 @@ class MovieListFragment : BaseFragment(), MovieListAdapter.OnItemFavoriteListene
 
     override fun setupObservers() {
         movieModel.movieResults.observe(this, Observer {
-            Log.d("Ob", "Lista atualizada ${it.size}")
             movieListAdapter.movieList = it
+        })
+        movieModel.errorMessage.observe(this, Observer {
+            it?.let {
+                Snackbar.make(fragmentMovieListBinding.root, it, Snackbar.LENGTH_SHORT).show()
+                movieModel.errorMessageDisplayed()
+            }
         })
     }
 
