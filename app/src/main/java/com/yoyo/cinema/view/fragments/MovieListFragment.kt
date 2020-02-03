@@ -21,7 +21,11 @@ import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * A simple [Fragment] subclass.
+ * Not 100% satisfied with almost a code duplication between the MovieListFragment and
+ * the FavoritesMoviesFragment.
+ *
+ * I believe it would be possible to generalize the injection of the model by using templates or
+ * delegation, this would result in less code duplication.
  */
 class MovieListFragment : BaseFragment(), MovieListAdapter.OnItemFavoriteListener {
 

@@ -16,6 +16,7 @@ class MovieRepository(private val movieDbApi: TheMovieDbApi, private val movieDa
     fun getMovieList(query: String) = flow {
         val apiMovieList = queryMovieListAPI(query)
 
+        // This is extreme ugly. But couldn't think in a better way to do it as of now
         favoreMovies.collect {
             it.forEach { favoriteMovie ->
                 apiMovieList.find { apiMovieItem ->
